@@ -32,7 +32,7 @@ export const todoSlice = createSlice({
                 return todo
             })
             state.todos = newTodos
-            toast.info(action.payload.isDone ? "Задача выполнена" : "Задача активирована")
+            toast.info(action.payload.isDone ? "Задача активирована" : "Задача выполнена")
         },
         deleteAction: (state, action: PayloadAction<ToDo>) => {
             const newTodos = state.todos.filter((todo) => todo.id !== action.payload.id)

@@ -1,6 +1,6 @@
 import { ToDoListItem } from "./ToDoListItem/ToDoListItem"
-import './ToDoList.scss'
 import { ToDo } from "../../models/todo-item"
+import { ToDoListContainer, ToDoListFailed, ToDoListCompleted } from "./ToDoList.styled"
 
 export const ToDoList = (props: { todos: ToDo[], updateToDo: Function, deleteToDo: Function }) => {
     const checkedList = () => {
@@ -34,13 +34,13 @@ export const ToDoList = (props: { todos: ToDo[], updateToDo: Function, deleteToD
     }
 
     return (
-        <div className="todo-container">
-            <ul className="todo-list failed">
+        <ToDoListContainer>
+            <ToDoListFailed className="todo-list failed">
                 {checkedList()}
-            </ul>
-            <ul className="todo-list completed">
+            </ToDoListFailed>
+            <ToDoListCompleted className="todo-list completed">
                 {unCheckedList()}
-            </ul>
-        </div>
+            </ToDoListCompleted>
+        </ToDoListContainer>
     )
 }

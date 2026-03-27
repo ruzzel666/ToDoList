@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './assets/scss/normalize.scss';
-import './assets/scss/style.scss';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import { store } from './store';
 import { Provider } from 'react-redux'
+import { GlobalStyle } from './styles/GlobalStyle';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,6 +21,7 @@ root.render(
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
       </Helmet>
       <Provider store={store}>
+        <GlobalStyle />
         <RouterProvider router={router} />
       </Provider>
       <ToastContainer position="bottom-right" />
