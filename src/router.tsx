@@ -4,12 +4,27 @@ import { NotFound } from "./pages/404";
 import { ToDoListPage } from "./pages/ToDoListPage";
 import { ViewList } from "./pages/ViewList";
 import { ViewListItem } from "./pages/ViewListItem";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles/GlobalStyle";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+
+const NotFoundWrapper = () => {
+    const theme = useSelector((state: RootState) => state.themeList.theme)
+
+    return (
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <NotFound />
+        </ThemeProvider>
+    )
+}
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
-        errorElement: <NotFound />,
+        errorElement: <NotFoundWrapper />,
         children: [
             { path: '/', element: <ToDoListPage /> },
             { path: '/list', element: <ViewList />, },
@@ -18,6 +33,6 @@ export const router = createBrowserRouter([
     },
     {
         path: '*',
-        element: <NotFound />
+        element: <NotFoundWrapper />
     }
 ], { basename: '/app/' })
