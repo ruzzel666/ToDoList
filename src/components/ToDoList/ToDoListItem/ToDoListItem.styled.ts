@@ -34,31 +34,33 @@ export const ToDoItem = styled.li<{ $isOverdue: boolean }>`
 
 export const ToDoItemText = styled.span`
     flex: 1;
+    margin-right: 10px;
+`
+
+export const ToDoItemRight = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
 `
 
 export const ToDoItemDueDate = styled.span<{ $isOverdue: boolean }>`
     font-size: 12px;
     color: ${(props) => (props.$isOverdue ? '#e74c3c' : '#f39c12')};
-    margin: 0 15px;
-    padding: 2px 8px;
+    padding: 4px 10px;
     background: ${(props) => (props.$isOverdue ? '#fadbd8' : '#fef9e7')};
     border-radius: 4px;
     white-space: nowrap;
+    font-weight: 600;
 `
 
 export const ToDoItemControls = styled.div`
-    width: 100px;
-    height: 50px;
     display: flex;
-
-    position: absolute;
-    top: 0;
-    right: 0;
+    gap: 0;
 `
 
 export const ToDoItemControl = styled.button<{ $icon: string }>`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: transparent;
     background-position: center;
     background-repeat: no-repeat;
@@ -68,15 +70,20 @@ export const ToDoItemControl = styled.button<{ $icon: string }>`
     outline: none;
     cursor: pointer;
     background-image: url(${(props) => props.$icon});
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
 
-    &:last-of-type:before {
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:first-of-type::before {
         content: '';
         width: 1px;
-        height: 30px;
+        height: 24px;
         background: #edf0f1;
-
         position: absolute;
-        top: 10px;
+        top: 8px;
         left: 0;
     }
 `

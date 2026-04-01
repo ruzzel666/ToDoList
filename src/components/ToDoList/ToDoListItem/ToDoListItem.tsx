@@ -1,5 +1,5 @@
 import { ToDo } from '../../../models/todo-item'
-import { ToDoItem, ToDoItemControl, ToDoItemControls, ToDoItemText, ToDoItemDueDate } from './ToDoListItem.styled'
+import { ToDoItem, ToDoItemControl, ToDoItemControls, ToDoItemText, ToDoItemDueDate, ToDoItemRight } from './ToDoListItem.styled'
 
 import checkIcon from '../../../assets/images/check.png'
 import uncheckIcon from '../../../assets/images/uncheck.png'
@@ -23,21 +23,23 @@ export const ToDoListItem = (props: { toDoItem: ToDo, updateToDo: Function, dele
     return (
         <ToDoItem $isOverdue={isOverdue}>
             <ToDoItemText>{props.toDoItem.text}</ToDoItemText>
-            {props.toDoItem.dueDate && (
-                <ToDoItemDueDate $isOverdue={isOverdue}>
-                    {formatDueDate(props.toDoItem.dueDate)}
-                </ToDoItemDueDate>
-            )}
-            <ToDoItemControls>
-                <ToDoItemControl
-                    $icon={trashIcon}
-                    onClick={() => props.deleteToDo(props.toDoItem)}
-                ></ToDoItemControl>
-                <ToDoItemControl
-                    $icon={props.toDoItem.isDone ? checkIcon : uncheckIcon}
-                    onClick={() => props.updateToDo(props.toDoItem)}
-                ></ToDoItemControl>
-            </ToDoItemControls>
+            <ToDoItemRight>
+                {props.toDoItem.dueDate && (
+                    <ToDoItemDueDate $isOverdue={isOverdue}>
+                        {formatDueDate(props.toDoItem.dueDate)}
+                    </ToDoItemDueDate>
+                )}
+                <ToDoItemControls>
+                    <ToDoItemControl
+                        $icon={trashIcon}
+                        onClick={() => props.deleteToDo(props.toDoItem)}
+                    ></ToDoItemControl>
+                    <ToDoItemControl
+                        $icon={props.toDoItem.isDone ? checkIcon : uncheckIcon}
+                        onClick={() => props.updateToDo(props.toDoItem)}
+                    ></ToDoItemControl>
+                </ToDoItemControls>
+            </ToDoItemRight>
         </ToDoItem>
     )
 }
