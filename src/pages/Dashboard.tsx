@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+import { RootState } from '../store'
+import { ToDo } from '../models/todo-item'
 import {
     DashboardWrapper,
     DashboardTitle,
@@ -35,8 +36,8 @@ export const Dashboard = () => {
 
     // Статистика
     const totalTasks = todos.length
-    const completedTasks = todos.filter(t => t.isDone).length
-    const overdueTasks = todos.filter(t => t.dueDate && new Date(t.dueDate) < new Date() && !t.isDone).length
+    const completedTasks = todos.filter((t: ToDo) => t.isDone).length
+    const overdueTasks = todos.filter((t: ToDo) => t.dueDate && new Date(t.dueDate) < new Date() && !t.isDone).length
     const pendingTasks = totalTasks - completedTasks
 
     // Прогресс выполнения
@@ -57,7 +58,7 @@ export const Dashboard = () => {
             const nextDay = new Date(dayDate)
             nextDay.setDate(nextDay.getDate() + 1)
 
-            const completed = todos.filter(todo => {
+            const completed = todos.filter((todo: ToDo) => {
                 if (!todo.isDone || !todo.dueDate) return false
                 const todoDate = new Date(todo.dueDate)
                 todoDate.setHours(0, 0, 0, 0)
@@ -78,10 +79,7 @@ export const Dashboard = () => {
         const currentMonth = new Date().getMonth()
 
         return months.slice(0, currentMonth + 1).map((month, index) => {
-            const monthDate = new Date(new Date().getFullYear(), index, 1)
-            const nextMonth = new Date(new Date().getFullYear(), index + 1, 0)
-
-            const completed = todos.filter(todo => {
+            const completed = todos.filter((todo: ToDo) => {
                 if (!todo.isDone || !todo.dueDate) return false
                 const todoDate = new Date(todo.dueDate)
                 return todoDate.getMonth() === index && todoDate.getFullYear() === new Date().getFullYear()
@@ -217,7 +215,7 @@ export const Dashboard = () => {
                                     cx="50%"
                                     cy="50%"
                                     labelLine={false}
-                                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                                    label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
                                     outerRadius={100}
                                     fill="#8884d8"
                                     dataKey="value"

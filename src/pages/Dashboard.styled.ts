@@ -10,7 +10,7 @@ export const DashboardWrapper = styled.div`
 export const DashboardTitle = styled.h1`
     font-size: 28px;
     font-weight: 700;
-    color: ${(props) => (props.theme.name === 'dark' ? '#ecf0f1' : '#2c3e50')};
+    color: ${({ theme }) => (theme as any).name === 'dark' ? '#ecf0f1' : '#2c3e50'};
     margin: 0 0 30px 0;
     text-align: center;
 `
@@ -31,7 +31,7 @@ export const StatsGrid = styled.div`
 `
 
 export const StatCard = styled.div`
-    background: ${(props) => props.theme.colors.backgroundPrimary};
+    background: ${({ theme }) => (theme as any).colors?.backgroundPrimary || '#fff'};
     border-radius: 16px;
     padding: 24px;
     display: flex;
@@ -66,12 +66,12 @@ export const StatCardIcon = styled.div<{ $color: string }>`
 export const StatCardValue = styled.div`
     font-size: 36px;
     font-weight: 700;
-    color: ${(props) => (props.theme.name === 'dark' ? '#ecf0f1' : '#2c3e50')};
+    color: ${({ theme }) => (theme as any).name === 'dark' ? '#ecf0f1' : '#2c3e50'};
 `
 
 export const StatCardLabel = styled.div`
     font-size: 14px;
-    color: ${(props) => (props.theme.name === 'dark' ? '#95a5a6' : '#7f8c8d')};
+    color: ${({ theme }) => (theme as any).name === 'dark' ? '#95a5a6' : '#7f8c8d'};
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -88,7 +88,7 @@ export const ChartsGrid = styled.div`
 `
 
 export const ChartCard = styled.div`
-    background: ${(props) => props.theme.colors.backgroundPrimary};
+    background: ${({ theme }) => (theme as any).colors?.backgroundPrimary || '#fff'};
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -97,7 +97,7 @@ export const ChartCard = styled.div`
 export const ChartTitle = styled.h2`
     font-size: 18px;
     font-weight: 600;
-    color: ${(props) => (props.theme.name === 'dark' ? '#ecf0f1' : '#2c3e50')};
+    color: ${({ theme }) => (theme as any).name === 'dark' ? '#ecf0f1' : '#2c3e50'};
     margin: 0 0 20px 0;
     text-align: center;
 `
@@ -111,6 +111,6 @@ export const ChartWrapper = styled.div`
     }
 
     .recharts-tooltip-cursor {
-        fill: ${(props) => (props.theme.name === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)')};
+        fill: ${({ theme }) => (theme as any).name === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)'};
     }
 `
