@@ -9,8 +9,8 @@ export const ToDoListPage = () => {
     const todoList = useSelector((state: RootState) => state.todoList.todos)
     const dispatch = useDispatch()
 
-    const createNewToDo = (text: string) => {
-        dispatch(createAction(text))
+    const createNewToDo = (text: string, dueDate?: string) => {
+        dispatch(createAction({ text, dueDate }))
     }
 
     const updateToDo = (toDoItem: ToDo) => {

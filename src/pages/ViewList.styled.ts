@@ -9,7 +9,7 @@ export const ListWrapper = styled.div`
 
 export const ListGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 10px;
 
@@ -19,7 +19,7 @@ export const ListGrid = styled.div`
     }
 `
 
-export const CardLink = styled.a<{ $done: boolean }>`
+export const CardLink = styled.a<{ $done: boolean; $isOverdue: boolean }>`
     display: flex;
     flex-direction: column;
     background: ${(props) => props.theme.colors.backgroundPrimary};
@@ -31,8 +31,17 @@ export const CardLink = styled.a<{ $done: boolean }>`
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    min-height: 140px;
+    min-height: 160px;
     cursor: pointer;
+
+    ${(props) =>
+        props.$isOverdue &&
+        !props.$done &&
+        `
+        box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+        border: 2px solid #e74c3c;
+        animation: pulse 2s infinite;
+    `}
 
     &:hover {
         transform: translateY(-5px);
@@ -50,13 +59,26 @@ export const CardLink = styled.a<{ $done: boolean }>`
         left: 0;
         width: 6px;
         height: 100%;
-        background: ${(props) => (props.$done ? 'linear-gradient(180deg, #27ae60, #2ecc71)' : 'linear-gradient(180deg, #e74c3c, #f39c12)')};
+        background: ${(props) => {
+        if (props.$done) return 'linear-gradient(180deg, #27ae60, #2ecc71)';
+        if (props.$isOverdue) return 'linear-gradient(180deg, #e74c3c, #c0392b)';
+        return 'linear-gradient(180deg, #f39c12, #e67e22)';
+    }};
         border-radius: 6px 0 0 6px;
         transition: width 0.3s ease;
     }
 
     &:hover::before {
         width: 8px;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+        }
+        50% {
+            box-shadow: 0 4px 30px rgba(231, 76, 60, 0.6);
+        }
     }
 `
 
@@ -112,8 +134,8 @@ export const CardStatus = styled.span<{ $done: boolean }>`
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    background: ${(props) => props.$done 
-        ? 'linear-gradient(135deg, #d5f5e3, #abebc6)' 
+    background: ${(props) => props.$done
+        ? 'linear-gradient(135deg, #d5f5e3, #abebc6)'
         : 'linear-gradient(135deg, #fadbd8, #f5b7b1)'};
     color: ${(props) => props.$done ? '#27ae60' : '#e74c3c'};
     transition: transform 0.2s ease;
@@ -138,6 +160,25 @@ export const CardArrow = styled.span`
     ${CardLink}:hover & {
         transform: translateX(4px);
         background: rgba(255, 255, 255, 0.2);
+    }
+`
+
+export const CardDueDate = styled.div<{ $isOverdue: boolean }>`
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: ${(props) => props.$isOverdue
+        ? 'linear-gradient(135deg, #fadbd8, #f5b7b1)'
+        : 'linear-gradient(135deg, #fef9e7, #fdebd0)'};
+    color: ${(props) => props.$isOverdue ? '#e74c3c' : '#f39c12'};
+    font-weight: 600;
+
+    svg {
+        width: 14px;
+        height: 14px;
     }
 `
 

@@ -8,6 +8,11 @@ export interface TodoState {
     todos: ToDo[]
 }
 
+export interface CreateTodoPayload {
+    text: string
+    dueDate?: string
+}
+
 const initialState: TodoState = {
     todos: [],
 }
@@ -16,11 +21,12 @@ export const todoSlice = createSlice({
     name: 'todoList',
     initialState,
     reducers: {
-        createAction: (state, action: PayloadAction<string>) => {
+        createAction: (state, action: PayloadAction<CreateTodoPayload>) => {
             const newToDo: ToDo = {
                 id: uuid(),
-                text: action.payload,
-                isDone: false
+                text: action.payload.text,
+                isDone: false,
+                dueDate: action.payload.dueDate
             }
             state.todos = [...state.todos, newToDo]
             toast.success("Задача добавлена")

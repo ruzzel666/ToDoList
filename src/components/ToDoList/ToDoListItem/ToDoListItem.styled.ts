@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ToDoItem = styled.li`
+export const ToDoItem = styled.li<{ $isOverdue: boolean }>`
     width: 100%;
     min-height: 50px;
     font-size: 14px;
@@ -10,6 +10,7 @@ export const ToDoItem = styled.li`
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     background: #fff;
     border-radius: 5px;
@@ -18,13 +19,32 @@ export const ToDoItem = styled.li`
     margin: 0 0 10px 0;
     padding: 14px;
     word-break: break-word;
+    
+    ${(props) =>
+        props.$isOverdue &&
+        `
+        border-left: 4px solid #e74c3c;
+        background: linear-gradient(90deg, #fadbd8 0%, #fff 100%);
+    `}
 
     &:last-child {
         margin: 0;
     }
 `
 
-export const ToDoItemText = styled.span``
+export const ToDoItemText = styled.span`
+    flex: 1;
+`
+
+export const ToDoItemDueDate = styled.span<{ $isOverdue: boolean }>`
+    font-size: 12px;
+    color: ${(props) => (props.$isOverdue ? '#e74c3c' : '#f39c12')};
+    margin: 0 15px;
+    padding: 2px 8px;
+    background: ${(props) => (props.$isOverdue ? '#fadbd8' : '#fef9e7')};
+    border-radius: 4px;
+    white-space: nowrap;
+`
 
 export const ToDoItemControls = styled.div`
     width: 100px;
