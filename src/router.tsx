@@ -4,6 +4,7 @@ import { NotFound } from "./pages/404";
 import { ToDoListPage } from "./pages/ToDoListPage";
 import { ViewList } from "./pages/ViewList";
 import { ViewListItem } from "./pages/ViewListItem";
+import { Dashboard } from "./pages/Dashboard";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { useSelector } from "react-redux";
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
         errorElement: <NotFoundWrapper />,
         children: [
             { path: '/', element: <ToDoListPage /> },
+            { path: '/dashboard', element: <Dashboard /> },
             { path: '/list', element: <ViewList />, },
             { path: '/list/:id', element: <ViewListItem /> }
         ]

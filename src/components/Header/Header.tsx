@@ -13,6 +13,7 @@ export const Header = () => {
         <HeaderWrapper>
             <HeaderContainer>
                 <HeaderLink as={Link} to="/" $active={location.pathname === '/'}>ToDo</HeaderLink>
+                <HeaderLink as={Link} to="/dashboard" $active={location.pathname === '/dashboard'}>Dashboard</HeaderLink>
                 <HeaderLink as={Link} to="/list" $active={location.pathname === '/list'}>List</HeaderLink>
                 <ToggleButton>
                     <ToggleControl onClick={() => dispatch(toggleThemeAction())} $themeName={theme.name} />
